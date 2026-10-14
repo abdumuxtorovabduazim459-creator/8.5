@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Genre, Book, Comment
+from .models import Genre, Book
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,12 +21,3 @@ class BookSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'pages': {'min_value': 1},
         }
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(read_only=True)
-
-    class Meta:
-        model = Comment
-        fields = ['id', 'book', 'user', 'text', 'created_at']
-        read_only_fields = ['id', 'user', 'created_at']
